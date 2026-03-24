@@ -31,28 +31,11 @@ Sensitive Data
 * TransactionRecords | Fraud & financial manipulation
 * API Keys | Full system compromise
 
-* Data Flow Diagram(DFD)
- 
- [ Customer / Merchant ]
-            |
-            | HTTPS (TLS)
-            v
-      [ Web / Mobile Client ]
-            |
-            v
-        [ API Gateway ]
-            |
-      ---------------------
-      |                   |
-      v                   v
-[ Payment Service ]   [ Auth Service ]
-      |
-      v
-     [ Database ]
-      |
-      v
-[ Third-Party Payment Processor ]
+# Data Flow Diagram(DFD)
 
+```markdown
+See Data Flow Diagram: [DFD](dfd.md)
+ 
            
 4 Trust Boundaries
 Trust boundaries exit between:
