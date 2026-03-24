@@ -2,9 +2,25 @@
 
 ```mermaid
 flowchart TD
-    A["Customer / Merchant"] -->|"HTTPS TLS"| B["Web / Mobile Client"]
-    B --> C["API Gateway"]
-    C --> D["Payment Service"]
-    C --> E["Auth Service"]
-    D --> F[("Database")]
-    F --> G["Third-Party Payment Processor"]
+
+    USER["Customer / Merchant"]
+
+    subgraph INTERNET["Internet (Untrusted Zone)"]
+        CLIENT["Web / Mobile Client"]
+    end
+
+    subgraph BACKEND["Backend (Trusted Zone)"]
+        API["API Gateway"]
+        AUTH["Auth Service"]
+        PAY["Payment Service"]
+        DB[("Database")]
+    end
+
+    THIRD["Third-Party Payment Processor"]
+
+    USER -->|"HTTPS TLS"| CLIENT
+    CLIENT -->|"API Requests"| API
+    API --> AUTH
+    API --> PAY
+    PAY -->|"Store / Retrieve"| DB
+    PAY -->|"Payment Request"| THIRD
